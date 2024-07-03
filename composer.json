@@ -1,0 +1,19 @@
+{
+    "name": "forest-yeti/triton-engine",
+    "description": "Triton Engine - Framework для PHP, который реализует базовую игру в покер",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ForestYeti\\TritonEngine\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Artem Tiutnev",
+            "email": "artem.tiutnev@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
