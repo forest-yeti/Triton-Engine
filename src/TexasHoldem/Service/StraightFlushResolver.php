@@ -64,6 +64,8 @@ class StraightFlushResolver implements ResolverInterface
         }
 
         $kicker = null;
+
+        $pocketCards = (new GameCardDeck($pocketCards))->sortAsc();
         if ($pocketCards[1]->getSuit() === $targetSuit) {
             $kicker = $pocketCards[1];
         } else if ($pocketCards[0]->getSuit() === $targetSuit) {
