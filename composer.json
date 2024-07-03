@@ -8,6 +8,11 @@
             "ForestYeti\\TritonEngine\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-0": { 
+            "ForestYeti\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Artem Tiutnev",
@@ -15,5 +20,7 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require-dev": {
+        "phpunit/phpunit": "10"
+    }
 }
