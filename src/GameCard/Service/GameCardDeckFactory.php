@@ -2,13 +2,20 @@
 
 namespace ForestYeti\TritonEngine\GameCard\Service;
 
-use ForestYeti\TritonEngine\GameCard\Entity\GameCardDeck;
 use ForestYeti\TritonEngine\GameCard\Entity\GameCardEntity;
 use ForestYeti\TritonEngine\GameCard\Enum\RankEnum;
 use ForestYeti\TritonEngine\GameCard\Enum\SuitEnum;
+use ForestYeti\TritonEngine\GameCard\Repository\GameCardDeck;
 
 class GameCardDeckFactory
 {
+    private GameCardBuilder $gameCardBuilder;
+
+    public function __construct()
+    {
+        $this->gameCardBuilder = new GameCardBuilder();
+    }
+
     public function factoryEmpty(): GameCardDeck
     {
         return new GameCardDeck();
@@ -44,7 +51,7 @@ class GameCardDeckFactory
         foreach ($ranks as $rank) {
             foreach ($suits as $suit) {
                 $gameCardDeck->add(
-                    new GameCardEntity($rank->value, $suit->value)
+                    $this->gameCardBuilder->build($rank, $suit)
                 );
             }
         }

@@ -12,7 +12,8 @@ interface ResolverInterface
     public function getPriority(): int;
 
     /**
-     * @param GameCardEntity[] $gameCards
+     * @param GameCardEntity[] $pocketCards
+     * @param GameCardEntity[] $boardCards
      */
-    public function execute(array $gameCards): ResolverResult;
+    public function execute(array $pocketCards, array $boardCards): ResolverResult;
 }

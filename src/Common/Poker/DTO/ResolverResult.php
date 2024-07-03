@@ -9,6 +9,7 @@ class ResolverResult
     public function __construct(
         private readonly string          $combinationName,
         private readonly int             $priority,
+        private readonly bool            $combinationExist,
         private readonly ?GameCardEntity $kicker
     ) {}
 
@@ -20,6 +21,11 @@ class ResolverResult
     public function getPriority(): int
     {
         return $this->priority;
+    }
+
+    public function isCombinationExist()
+    {
+        return $this->combinationExist;
     }
 
     public function getKicker(): ?GameCardEntity
