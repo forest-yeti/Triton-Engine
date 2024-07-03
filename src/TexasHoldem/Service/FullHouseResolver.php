@@ -5,6 +5,7 @@ namespace ForestYeti\TritonEngine\TexasHoldem\Service;
 use ForestYeti\TritonEngine\Common\Poker\DTO\ResolverResult;
 use ForestYeti\TritonEngine\GameCard\Entity\GameCardEntity;
 use ForestYeti\TritonEngine\Common\Poker\Service\ResolverInterface;
+use ForestYeti\TritonEngine\GameCard\Enum\SuitEnum;
 
 class FullHouseResolver implements ResolverInterface
 {
@@ -30,8 +31,8 @@ class FullHouseResolver implements ResolverInterface
         $groupedByRanks = [];
         $gameCards      = array_merge($pocketCards, $boardCards);
 
-        $onePairKicker = null;
-        $setKicker     = null;
+        $onePairRank = null;
+        $setRank     = null;
 
         foreach ($gameCards as $gameCard) {
             if (!isset($groupedByRanks[$gameCard->getRank()])) {
@@ -39,22 +40,26 @@ class FullHouseResolver implements ResolverInterface
             }
 
             $groupedByRanks[$gameCard->getRank()]++;
+        }
 
-            if ($groupedByRanks[$gameCard->getRank()] === 3) {
-                $setKicker = $gameCard;
+        foreach ($groupedByRanks as $rank => $counter) {
+            if ($counter === 2) {
+                $onePairRank = $rank;
             }
-            if ($groupedByRanks[$gameCard->getRank()] === 2) {
-                $onePairKicker = $gameCard;
+
+            if ($counter === 3) {
+                $setRank = $rank;
             }
         }
 
-        if ($onePairKicker !== null && $setKicker !== null) {
-            $kicker = $onePairKicker;
-            if ($setKicker->getRank() > $onePairKicker->getRank()) {
-                $kicker = $setKicker;
+        if ($onePairRank !== null && $setRank !== null) {
+            $kickerRank = $onePairRank;
+            if ($setRank > $onePairRank) {
+                $kickerRank = $setRank;
             }
 
-            return new ResolverResult(self::NAME, self::PRIORITY, true, $kicker);
+            $gameCard = new GameCardEntity($kickerRank, SuitEnum::Diamods->value);
+            return new ResolverResult(self::NAME, self::PRIORITY, true, $gameCard);
         }
 
         return new ResolverResult(self::NAME, self::PRIORITY, false);

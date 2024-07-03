@@ -29,7 +29,7 @@ class HighCardResolver implements ResolverInterface
     public function execute(array $pocketCards, array $boardCards): ResolverResult
     {
         $gameCards = array_merge($pocketCards, $boardCards);
-        $gameCards = (new GameCardDeck())->sortAsc();
+        $gameCards = (new GameCardDeck($gameCards))->sortAsc();
 
         $kicker = null;
         if (!empty($gameCards)) {
