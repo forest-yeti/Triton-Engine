@@ -39,7 +39,8 @@ class StraightFlushResolver implements ResolverInterface
             $groupedBySuits[$gameCard->getSuit()][] = $gameCard;
         }
 
-        $kicker = null; 
+        $kicker           = null;
+        $combinationExist = false;
         foreach ($groupedBySuits as $suit => $cardsBySuit) {
             if (count($cardsBySuit) < 5) {
                 continue;
@@ -55,11 +56,12 @@ class StraightFlushResolver implements ResolverInterface
             }
 
             if ($counter >= 5) {
+                $combinationExist = true;
                 break;
             }
         }
 
-        if ($counter < 5) {
+        if (!$combinationExist) {
             return new ResolverResult(self::NAME, self::PRIORITY, false);
         }
 
