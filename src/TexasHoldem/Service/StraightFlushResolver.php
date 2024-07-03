@@ -39,7 +39,7 @@ class StraightFlushResolver implements ResolverInterface
             $groupedBySuits[$gameCard->getSuit()][] = $gameCard;
         }
 
-        $targetSuit = null; 
+        $kicker = null; 
         foreach ($groupedBySuits as $suit => $cardsBySuit) {
             if (count($cardsBySuit) < 5) {
                 continue;
@@ -50,26 +50,17 @@ class StraightFlushResolver implements ResolverInterface
             for ($i = 0; $i < count($gameCards) - 1; $i++) {
                 if ($this->hasStraightFlushDro($gameCards[$i], $gameCards[$i + 1])) {
                     $counter++;
+                    $kicker = $gameCards[$i + 1];
                 }
             }
 
             if ($counter >= 5) {
-                $targetSuit = $suit;
                 break;
             }
         }
 
-        if ($targetSuit === null) {
+        if ($counter < 5) {
             return new ResolverResult(self::NAME, self::PRIORITY, false);
-        }
-
-        $kicker = null;
-
-        $pocketCards = (new GameCardDeck($pocketCards))->sortAsc();
-        if ($pocketCards[1]->getSuit() === $targetSuit) {
-            $kicker = $pocketCards[1];
-        } else if ($pocketCards[0]->getSuit() === $targetSuit) {
-            $kicker = $pocketCards[0];
         }
 
         return new ResolverResult(self::NAME, self::PRIORITY, true, $kicker);

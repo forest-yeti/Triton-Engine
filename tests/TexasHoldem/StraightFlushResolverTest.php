@@ -19,7 +19,7 @@ class StraightFlushResolverTest extends TestCase
         $this->gameCardBuilder       = new GameCardBuilder();
     }
 
-    public function testStraightFlushExistWithKicker()
+    public function testStraightFlushExist()
     {
         $pocketCards = [
             $this->gameCardBuilder->build(RankEnum::Five, SuitEnum::Diamods),
@@ -37,29 +37,8 @@ class StraightFlushResolverTest extends TestCase
         $resolverResult = $this->straightFlushResolver->execute($pocketCards, $boardCards);
 
         $this->assertTrue($resolverResult->isCombinationExist());
-        $this->assertEquals(RankEnum::Six->value, $resolverResult->getKicker()->getRank());
+        $this->assertEquals(RankEnum::Nine->value, $resolverResult->getKicker()->getRank());
         $this->assertEquals(SuitEnum::Diamods->value, $resolverResult->getKicker()->getSuit());
-    }
-
-    public function testStraightFlushExistWithoutKicker()
-    {
-        $pocketCards = [
-            $this->gameCardBuilder->build(RankEnum::King, SuitEnum::Spades),
-            $this->gameCardBuilder->build(RankEnum::Ace, SuitEnum::Hearts),
-        ];
-
-        $boardCards = [
-            $this->gameCardBuilder->build(RankEnum::Six, SuitEnum::Diamods),
-            $this->gameCardBuilder->build(RankEnum::Seven, SuitEnum::Diamods),
-            $this->gameCardBuilder->build(RankEnum::Five, SuitEnum::Diamods),
-            $this->gameCardBuilder->build(RankEnum::Nine, SuitEnum::Diamods),
-            $this->gameCardBuilder->build(RankEnum::Eight, SuitEnum::Diamods),
-        ];
-
-        $resolverResult = $this->straightFlushResolver->execute($pocketCards, $boardCards);
-
-        $this->assertTrue($resolverResult->isCombinationExist());
-        $this->assertNull($resolverResult->getKicker());
     }
 
     public function testStraightFlushNotExist()
