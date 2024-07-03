@@ -41,7 +41,7 @@ class StraightFlushResolver implements ResolverInterface
 
         $kicker           = null;
         $combinationExist = false;
-        foreach ($groupedBySuits as $suit => $cardsBySuit) {
+        foreach ($groupedBySuits as $cardsBySuit) {
             if (count($cardsBySuit) < 5) {
                 continue;
             }
