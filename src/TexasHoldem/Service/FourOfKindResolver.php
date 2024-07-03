@@ -9,7 +9,7 @@ use ForestYeti\TritonEngine\Common\Poker\Service\ResolverInterface;
 class FourOfKindResolver implements ResolverInterface
 {
     private const NAME     = 'FourOfKind';
-    private const PRIORITY = 10;
+    private const PRIORITY = 8;
 
     public function getName(): string
     {

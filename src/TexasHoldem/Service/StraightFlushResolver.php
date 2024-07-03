@@ -10,7 +10,7 @@ use ForestYeti\TritonEngine\GameCard\Repository\GameCardDeck;
 class StraightFlushResolver implements ResolverInterface
 {
     private const NAME     = 'StraightFlush';
-    private const PRIORITY = 10;
+    private const PRIORITY = 9;
 
     public function getName(): string
     {
