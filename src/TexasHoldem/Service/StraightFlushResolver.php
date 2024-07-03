@@ -52,6 +52,8 @@ class StraightFlushResolver implements ResolverInterface
                 if ($this->hasStraightFlushDro($gameCards[$i], $gameCards[$i + 1])) {
                     $counter++;
                     $kicker = $gameCards[$i + 1];
+                } else {
+                    $counter = 1;
                 }
             }
 

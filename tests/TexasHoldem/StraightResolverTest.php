@@ -30,7 +30,7 @@ class StraightResolverTest extends TestCase
             $this->gameCardBuilder->build(RankEnum::Queen, SuitEnum::Hearts),
             $this->gameCardBuilder->build(RankEnum::King, SuitEnum::Hearts),
             $this->gameCardBuilder->build(RankEnum::Ace, SuitEnum::Spades),
-            $this->gameCardBuilder->build(RankEnum::Nine, SuitEnum::Diamods),
+            $this->gameCardBuilder->build(RankEnum::Two, SuitEnum::Diamods),
             $this->gameCardBuilder->build(RankEnum::Five, SuitEnum::Diamods),
         ];
 

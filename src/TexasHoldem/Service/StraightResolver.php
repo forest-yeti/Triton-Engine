@@ -31,12 +31,14 @@ class StraightResolver implements ResolverInterface
         $gameCards = array_merge($pocketCards, $boardCards);
         $gameCards = (new GameCardDeck($gameCards))->sortAsc();
 
-        $counter = 0;
+        $counter = 1;
         $kicker  = null;
         for ($i = 0; $i < count($gameCards) - 1; $i++) {
             if ($gameCards[$i]->getRank() + 1 === $gameCards[$i + 1]->getRank()) {
                 $counter++;
                 $kicker = $gameCards[$i + 1];
+            } else {
+                $counter = 1;
             }
         }
 
