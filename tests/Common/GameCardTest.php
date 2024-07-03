@@ -2,6 +2,7 @@
 
 namespace ForestYeti\Tests\Common;
 
+use ForestYeti\TritonEngine\Common\Exception\ApplicationException;
 use ForestYeti\TritonEngine\GameCard\Service\GameCardBuilder;
 use ForestYeti\TritonEngine\GameCard\Enum\RankEnum;
 use ForestYeti\TritonEngine\GameCard\Enum\SuitEnum;
@@ -32,6 +33,8 @@ class GameCardTest extends TestCase
         $gameCardDeck = $this->gameCardDeckFactory->factoryEmpty();
 
         $this->assertEmpty($gameCardDeck->getAll());
+        $this->expectException(ApplicationException::class);
+        $gameCardDeck->pop();
     }
 
     public function testGameCardClassicDeck(): void
