@@ -71,6 +71,11 @@ class GameCardDeck
         return $founded;
     }
 
+    public function count(): int
+    {
+        return count($this->gameCards);
+    }
+
     /**
      * @return GameCardEntity[]
      */

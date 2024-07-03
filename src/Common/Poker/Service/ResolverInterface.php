@@ -1,6 +1,6 @@
 <?php
 
-namespace ForestYeti\TritonEngine\Common\Service;
+namespace ForestYeti\TritonEngine\Common\Poker\Service;
 
 use ForestYeti\TritonEngine\Common\Poker\DTO\ResolverResult;
 use ForestYeti\TritonEngine\GameCard\Entity\GameCardEntity;

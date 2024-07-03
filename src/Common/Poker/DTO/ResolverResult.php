@@ -10,7 +10,7 @@ class ResolverResult
         private readonly string          $combinationName,
         private readonly int             $priority,
         private readonly bool            $combinationExist,
-        private readonly ?GameCardEntity $kicker
+        private readonly ?GameCardEntity $kicker = null
     ) {}
 
     public function getCombinationName(): string
