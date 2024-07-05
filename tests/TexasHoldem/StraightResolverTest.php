@@ -40,6 +40,27 @@ class StraightResolverTest extends TestCase
         $this->assertEquals(RankEnum::Ace->value, $resolverResult->getKicker()->getRank());
     }
 
+    public function testStraightWithLowAce()
+    {
+        $pocketCards = [
+            $this->gameCardBuilder->build(RankEnum::Two, SuitEnum::Spades),
+            $this->gameCardBuilder->build(RankEnum::Three, SuitEnum::Spades),
+        ];
+
+        $boardCards = [
+            $this->gameCardBuilder->build(RankEnum::Queen, SuitEnum::Hearts),
+            $this->gameCardBuilder->build(RankEnum::King, SuitEnum::Hearts),
+            $this->gameCardBuilder->build(RankEnum::Ace, SuitEnum::Spades),
+            $this->gameCardBuilder->build(RankEnum::Four, SuitEnum::Diamods),
+            $this->gameCardBuilder->build(RankEnum::Five, SuitEnum::Diamods),
+        ];
+
+        $resolverResult = $this->straightResolver->execute($pocketCards, $boardCards);
+
+        $this->assertTrue($resolverResult->isCombinationExist());
+        $this->assertEquals(RankEnum::Five->value, $resolverResult->getKicker()->getRank());
+    }
+
     public function testStraightNotExist()
     {
         $pocketCards = [

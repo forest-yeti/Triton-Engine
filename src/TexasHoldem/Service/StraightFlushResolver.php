@@ -6,6 +6,7 @@ use ForestYeti\TritonEngine\Common\Poker\DTO\ResolverResult;
 use ForestYeti\TritonEngine\GameCard\Entity\GameCardEntity;
 use ForestYeti\TritonEngine\Common\Poker\Service\ResolverInterface;
 use ForestYeti\TritonEngine\GameCard\Repository\GameCardDeck;
+use ForestYeti\TritonEngine\GameCard\Enum\RankEnum;
 
 class StraightFlushResolver implements ResolverInterface
 {
@@ -31,6 +32,16 @@ class StraightFlushResolver implements ResolverInterface
         $gameCards      = array_merge($pocketCards, $boardCards);
         $groupedBySuits = [];
 
+        $gameCards = (new GameCardDeck($gameCards));
+        $aces = $gameCards->findByRank(RankEnum::Ace->value);
+        if (!empty($aces)) {
+            foreach ($aces as $ace) {
+                $gameCards->add(new GameCardEntity(RankEnum::LowAce->value, $ace->getSuit()));
+            }
+        }
+
+        $gameCards = $gameCards->getAll();
+
         foreach ($gameCards as $gameCard) {
             if (!isset($groupedBySuits[$gameCard->getSuit()])) {
                 $groupedBySuits[$gameCard->getSuit()] = [];
@@ -55,11 +66,11 @@ class StraightFlushResolver implements ResolverInterface
                 } else {
                     $counter = 1;
                 }
-            }
-
-            if ($counter >= 5) {
-                $combinationExist = true;
-                break;
+            
+                if ($counter >= 5) {
+                    $combinationExist = true;
+                    break;
+                }
             }
         }
 
