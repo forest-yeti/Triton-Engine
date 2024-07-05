@@ -6,4 +6,5 @@
 ```php
 $gameCardsDeck = (new GameCardDeckFactory())->factoryClassicDeck()
 $gameCardsDeck->shuffle();
-```php
+```
+После чего мы можем начать игру
